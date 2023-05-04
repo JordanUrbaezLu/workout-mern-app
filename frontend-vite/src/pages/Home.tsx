@@ -10,9 +10,13 @@ const Home = () => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
+      const URL = "http://localhost:4000/api/workouts";
       // this is where the frontend will hit the REST API
-      const response = await fetch("/api/workouts");
+      const response = await fetch(URL);
+
+      console.log(response);
       const json = await response.json();
+      console.log("JSON", json);
 
       if (response.ok) {
         dispatch({ type: "SET_WORKOUTS", payload: json });
@@ -22,11 +26,13 @@ const Home = () => {
     fetchWorkouts();
   }, [dispatch]);
 
+  console.log(workouts);
+
   return (
     <div className="home">
       <div className="workouts">
         {workouts &&
-          workouts.map((workout) => (
+          workouts.map((workout: any) => (
             <WorkoutDetails workout={workout} key={workout._id} />
           ))}
       </div>
