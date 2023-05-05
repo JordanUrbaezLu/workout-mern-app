@@ -1,17 +1,17 @@
 import * as React from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
-const WorkoutForm = () => {
+const WorkoutForm: React.FC = () => {
   const { dispatch } = useWorkoutsContext();
 
   const [title, setTitle] = React.useState("");
   const [load, setLoad] = React.useState("");
   const [reps, setReps] = React.useState("");
   const [error, setError] = React.useState(null);
-  const [emptyFields, setEmptyFields] = React.useState<any[]>([]);
+  const [emptyFields, setEmptyFields] = React.useState<string[]>([]);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     const workout = { title, load, reps };
 

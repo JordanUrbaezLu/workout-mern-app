@@ -2,8 +2,14 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 // date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { Workout } from "../types/types";
 
-const WorkoutDetails = ({ workout }: any) => {
+export interface WorkoutDetailsProps {
+  workout: Workout;
+}
+
+const WorkoutDetails: React.FC<WorkoutDetailsProps> = (props) => {
+  const { workout } = props;
   const { dispatch } = useWorkoutsContext();
 
   const handleClick = async () => {

@@ -1,14 +1,16 @@
 import * as React from "react";
+import { Action, State, Workout } from "../types/types";
 
-export const WorkoutsContext = React.createContext<any>(null);
-
-type Action = {
-  type: "SET_WORKOUTS" | "CREATE_WORKOUT" | "DELETE_WORKOUT";
-  payload: any;
+export type WorkoutsContextType = {
+  workouts: Workout[];
+  dispatch: React.Dispatch<Action>;
 };
 
-export const workoutsReducer = (state: any, action: Action) => {
-  console.log(state.type, action.type);
+export const WorkoutsContext = React.createContext<
+  WorkoutsContextType | undefined
+>(undefined);
+
+export const workoutsReducer = (state: State, action: Action) => {
   switch (action.type) {
     case "SET_WORKOUTS":
       return {
@@ -21,7 +23,7 @@ export const workoutsReducer = (state: any, action: Action) => {
     case "DELETE_WORKOUT":
       return {
         workouts: state.workouts.filter(
-          (w: any) => w._id !== action.payload._id
+          (workout: Workout) => workout._id !== action.payload._id
         ),
       };
     default:
@@ -33,11 +35,13 @@ interface WorkoutsContextProps {
   children?: React.ReactNode;
 }
 
-export const WorkoutsContextProvider = ({ children }: WorkoutsContextProps) => {
+export const WorkoutsContextProvider: React.FC<WorkoutsContextProps> = (
+  props
+) => {
+  const { children } = props;
   const [state, dispatch] = React.useReducer(workoutsReducer, {
     workouts: null,
   });
-
   return (
     <WorkoutsContext.Provider value={{ ...state, dispatch }}>
       {children}

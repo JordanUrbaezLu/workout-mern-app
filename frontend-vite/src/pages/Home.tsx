@@ -4,8 +4,9 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 // components
 import WorkoutDetails from "../components/WorkoutDetails";
 import WorkoutForm from "../components/WorkoutForm";
+import { Workout } from "../types/types";
 
-const Home = () => {
+const Home: React.FC = () => {
   const { workouts, dispatch } = useWorkoutsContext();
 
   useEffect(() => {
@@ -14,9 +15,7 @@ const Home = () => {
       // this is where the frontend will hit the REST API
       const response = await fetch(URL);
 
-      console.log(response);
       const json = await response.json();
-      console.log("JSON", json);
 
       if (response.ok) {
         dispatch({ type: "SET_WORKOUTS", payload: json });
@@ -26,13 +25,11 @@ const Home = () => {
     fetchWorkouts();
   }, [dispatch]);
 
-  console.log(workouts);
-
   return (
     <div className="home">
       <div className="workouts">
         {workouts &&
-          workouts.map((workout: any) => (
+          workouts.map((workout: Workout) => (
             <WorkoutDetails workout={workout} key={workout._id} />
           ))}
       </div>
