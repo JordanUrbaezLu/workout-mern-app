@@ -4,15 +4,19 @@ const Schema = mongoose.Schema;
 
 const workoutSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
+      required: true,
+    },
+    sets: {
+      type: Number,
       required: true,
     },
     reps: {
       type: Number,
       required: true,
     },
-    load: {
+    weight: {
       type: Number,
       required: true,
     },

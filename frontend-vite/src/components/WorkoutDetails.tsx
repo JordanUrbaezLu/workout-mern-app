@@ -12,6 +12,13 @@ const WorkoutDetails: React.FC<WorkoutDetailsProps> = (props) => {
   const { workout } = props;
   const { dispatch } = useWorkoutsContext();
 
+  const dateAddedLabel = `Added ${formatDistanceToNow(
+    new Date(workout.createdAt),
+    {
+      addSuffix: true,
+    }
+  )}`;
+
   const handleClick = async () => {
     const URL = "http://localhost:4000/api/workouts/";
     const response = await fetch(URL + workout._id, {
@@ -26,18 +33,20 @@ const WorkoutDetails: React.FC<WorkoutDetailsProps> = (props) => {
 
   return (
     <div className="workout-details">
-      <h4>{workout.title}</h4>
+      <h4>{workout.name}</h4>
       <p>
-        <strong>Load (kg): </strong>
-        {workout.load}
+        <strong>Weight: </strong>
+        {workout.weight} lbs
       </p>
       <p>
-        <strong>Number of reps: </strong>
-        {workout.reps}
+        <strong>Sets: </strong>
+        {workout.sets}x
       </p>
       <p>
-        {formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
+        <strong>Reps: </strong>
+        {workout.reps}x
       </p>
+      <p>{dateAddedLabel}</p>
       <span className="material-symbols-outlined" onClick={handleClick}>
         delete
       </span>
