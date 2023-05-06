@@ -1,9 +1,10 @@
 export type Workout = {
   createdAt: string;
-  load: number;
+  name: string;
   reps: number;
-  title: string;
+  sets: number;
   updatedAt: string;
+  weight: number;
   __v: number;
   _id: number;
 };

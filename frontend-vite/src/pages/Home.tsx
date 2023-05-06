@@ -5,6 +5,8 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import WorkoutDetails from "../components/WorkoutDetails";
 import WorkoutForm from "../components/WorkoutForm";
 import { Workout } from "../types/types";
+import WorkoutFormModal from "../components/WorkoutFormModal";
+import { Button } from "void-ui-library";
 
 const Home: React.FC = () => {
   const { workouts, dispatch } = useWorkoutsContext();
@@ -34,6 +36,8 @@ const Home: React.FC = () => {
           ))}
       </div>
       <WorkoutForm />
+      <Button>Hello</Button>
+      <WorkoutFormModal method="POST"/>
     </div>
   );
 };
